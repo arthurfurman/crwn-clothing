@@ -1,5 +1,6 @@
 import React from "react";
-import FormInput from '../form-input/form-input.component'
+import FormInput from "../form-input/form-input.component";
+import CustomButton from "../custom-button/custom-button.component";
 
 import "./sign-in.styles.scss";
 
@@ -15,20 +16,20 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSubmit = event => {
-      event.preventDefault();
-      this.setState({
-        email: "",
-        password: "",
-      });
-  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      email: "",
+      password: "",
+    });
+  };
 
-  handleChange = event => {
-    const {value , name} = event.target;
-      this.setState({
-        [name]: value
-      });
-  }
+  handleChange = (event) => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
 
   render() {
     return (
@@ -53,8 +54,7 @@ class SignIn extends React.Component {
             handleChange={this.handleChange}
             label="PASSWORD"
           />
-          <input type="submit" value="SIGN IN" />
-          <input type="submit" value="SIGN IN WITH GOOGLE" />
+          <CustomButton type="submit">SIGN IN</CustomButton>
         </form>
       </div>
     );

@@ -7,6 +7,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInPage from "./pages/sign-in/sign-in.component";
 import Header from "./components/header/header.component";
+import { auth } from "./firebase/firebase.utils";
 
 const HatsPage = () => <h1>HATS PAGE</h1>;
 
@@ -20,23 +21,45 @@ const MensPage = () => <h1>MENS PAGE</h1>;
 
 const ContactPage = () => <h1>CONTACT PAGE</h1>;
 
-function App() {
-  return (
-    <div>
-      <Header/>
-      <Switch>
-        <Route path="/shop/hats" component={HatsPage} />
-        <Route path="/shop/jackets" component={JacketPage} />
-        <Route path="/shop/sneakers" component={SneakersPage} />
-        <Route path="/shop/womens" component={WomensPage} />
-        <Route path="/shop/mens" component={MensPage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/contact" component={ContactPage} />
-        <Route path="/signin" component={SignInPage} />
-        <Route path="/" component={HomePage} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUser: null,
+    };
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser}/>
+        <Switch>
+          <Route path="/shop/hats" component={HatsPage} />
+          <Route path="/shop/jackets" component={JacketPage} />
+          <Route path="/shop/sneakers" component={SneakersPage} />
+          <Route path="/shop/womens" component={WomensPage} />
+          <Route path="/shop/mens" component={MensPage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route path="/signin" component={SignInPage} />
+          <Route path="/" component={HomePage} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,4 +1,3 @@
-import { root } from 'postcss-selector-parser';
 import { createStore, applyMiddleware } from 'redux'; 
 import logger from 'redux-logger';
 

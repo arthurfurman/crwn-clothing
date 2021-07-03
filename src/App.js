@@ -14,16 +14,6 @@ import { setCurrentUser } from "./redux/user/user.actions";
 
 import "./App.css";
 
-const HatsPage = () => <h1>HATS PAGE</h1>;
-
-const JacketPage = () => <h1>JACKETS PAGE</h1>;
-
-const SneakersPage = () => <h1>SNEAKERS PAGE</h1>;
-
-const WomensPage = () => <h1>WOMENS PAGE</h1>;
-
-const MensPage = () => <h1>MENS PAGE</h1>;
-
 const ContactPage = () => <h1>CONTACT PAGE</h1>;
 
 class App extends React.Component {
@@ -57,11 +47,6 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route path="/shop/hats" component={HatsPage} />
-          <Route path="/shop/jackets" component={JacketPage} />
-          <Route path="/shop/sneakers" component={SneakersPage} />
-          <Route path="/shop/womens" component={WomensPage} />
-          <Route path="/shop/mens" component={MensPage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/contact" component={ContactPage} />

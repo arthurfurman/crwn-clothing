@@ -8,6 +8,19 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 );
 
+export const selectCollectionsAsArray = createSelector(
+  [selectCollections],
+  (collections) => Object.values(collections)
+);
+
+export const selectCollectionsAsArrayForFirestore = createSelector(
+  [selectCollections],
+  (collections) => Object.values(collections).map((collection) => ({
+    title: collection.title,
+    items: collection.items,
+  }))
+);
+
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
   (collections) =>

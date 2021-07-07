@@ -15,10 +15,11 @@ export const selectCollectionsAsArray = createSelector(
 
 export const selectCollectionsAsArrayForFirestore = createSelector(
   [selectCollections],
-  (collections) => Object.values(collections).map((collection) => ({
-    title: collection.title,
-    items: collection.items,
-  }))
+  (collections) =>
+    Object.values(collections).map((collection) => ({
+      title: collection.title,
+      items: collection.items,
+    }))
 );
 
 export const selectCollectionsForPreview = createSelector(

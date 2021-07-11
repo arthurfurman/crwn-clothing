@@ -23,16 +23,15 @@ class ShopPage extends React.Component {
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
+    const { updateCollections } = this.props;
     const itemCollectionRef = firestore.collection("shopItems");
 
-    this.unsubscribeFromSnapshot = itemCollectionRef.onSnapshot(
-      async (snapshot) => {
-        const itemsCollectionMap =
-          convertShopItemsCollectionsSnapshotToMap(snapshot);
-        this.props.updateCollection(itemsCollectionMap);
-        this.setState({ loading: false });
-      }
-    );
+    itemCollectionRef.get().then((snapshot) => {
+      const itemsCollectionMap =
+        convertShopItemsCollectionsSnapshotToMap(snapshot);
+      updateCollections(itemsCollectionMap);
+      this.setState({ loading: false });
+    });
   }
 
   render() {
@@ -60,7 +59,7 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateCollection: (collectionMap) =>
+  updateCollections: (collectionMap) =>
     dispatch(updateCollections(collectionMap)),
 });
 

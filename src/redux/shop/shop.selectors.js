@@ -25,10 +25,12 @@ export const selectCollectionsAsArrayForFirestore = createSelector(
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
   (collections) =>
-    Object.values(collections).map((collection) => ({
-      ...collection,
-      items: collection.items.slice(0, 4),
-    }))
+    collections
+      ? Object.values(collections).map((collection) => ({
+          ...collection,
+          items: collection.items.slice(0, 4),
+        }))
+      : []
 );
 
 // using memoize to memoize selectCollection function with different collectionUrlParam variations
